@@ -20,6 +20,7 @@ import com.tugbabingol.habittracker.ViewModel.HabitViewModel
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.material.Button
 
 @Composable
 fun HomeScreen(navController: NavController, viewModel: HabitViewModel) {
@@ -32,6 +33,7 @@ fun HomeScreen(navController: NavController, viewModel: HabitViewModel) {
     Box(
         modifier = Modifier.fillMaxSize().padding(bottom = bottomPadding + 16.dp)
     ){
+
         LazyColumn {
             items(habits) { habit ->
                 Text(text = habit.title)

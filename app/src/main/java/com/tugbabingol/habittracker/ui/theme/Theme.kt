@@ -10,6 +10,9 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import com.tugbabingol.habittracker.ViewModel.ThemeViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -35,18 +38,19 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun HabitTrackerTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
+    themeViewModel: ThemeViewModel, // ViewModel'i buraya ekliyoruz!
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    val isDarkTheme = themeViewModel.isDarkTheme.collectAsStateWithLifecycle().value
+
+
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            if (isDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
-        darkTheme -> DarkColorScheme
+        isDarkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
 
