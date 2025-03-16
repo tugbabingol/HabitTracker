@@ -9,6 +9,6 @@ import com.tugbabingol.habittracker.ViewModel.HabitViewModel
 fun NavGraph(navController: NavHostController, viewModel: HabitViewModel, modifier: Modifier) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") { HomeScreen(navController, viewModel) }
-        composable("addHabit") { AddHabitScreen(navController, viewModel) }
+        composable("addHabit") { AddHabitScreen(navController, viewModel, modifier) }
     }
 }
