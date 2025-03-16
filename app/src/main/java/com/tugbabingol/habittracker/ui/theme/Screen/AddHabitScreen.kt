@@ -1,6 +1,7 @@
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -15,7 +16,7 @@ fun AddHabitScreen(navController: NavController, viewModel: HabitViewModel, modi
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(top = 16.dp )
+            .padding(top = 16.dp, start = 10.dp, end = 10.dp )
     ) {
         OutlinedTextField(
             value = title,
@@ -46,7 +47,8 @@ fun AddHabitScreen(navController: NavController, viewModel: HabitViewModel, modi
                     )
                 )
                 navController.popBackStack()
-            }
+            },
+            modifier = Modifier.align(Alignment.End)
         ) {
             Text("Save Habit")
         }

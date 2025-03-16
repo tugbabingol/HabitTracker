@@ -16,6 +16,6 @@ class HabitViewModel(private val repository: HabitRepository) : ViewModel() {
         initialValue = emptyList()
     )
 
-    fun addHabit(habit: HabitEntity) = viewModelScope.launch { repository.addHabit(habit) }
+    fun addHabit(habit: HabitEntity) = viewModelScope.launch { repository.insertHabit(habit) }
     fun deleteHabit(habit: HabitEntity) = viewModelScope.launch { repository.deleteHabit(habit) }
 }
