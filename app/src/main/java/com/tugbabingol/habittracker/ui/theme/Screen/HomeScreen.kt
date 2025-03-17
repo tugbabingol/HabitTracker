@@ -23,7 +23,7 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.material.Button
 
 @Composable
-fun HomeScreen(navController: NavController, viewModel: HabitViewModel) {
+fun HomeScreen(navController: NavController, viewModel: HabitViewModel, modifier: Modifier) {
     val habits by viewModel.allHabits.collectAsState()
 
     val bottomPadding = with(LocalDensity.current) {
@@ -44,6 +44,17 @@ fun HomeScreen(navController: NavController, viewModel: HabitViewModel) {
             modifier = Modifier.align(Alignment.BottomEnd)) {
             Icon(Icons.Default.Add, contentDescription = "Add Habit")
         }
+
+
+        Button(
+            onClick = { navController.navigate("allHabits") },
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text("Show All Habits")
+        }
+
     }
+
+
 
 }
