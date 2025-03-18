@@ -1,4 +1,6 @@
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,8 +21,11 @@ import androidx.navigation.NavController
 import com.tugbabingol.habittracker.ViewModel.HabitViewModel
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.material.Button
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 
 @Composable
 fun HomeScreen(navController: NavController, viewModel: HabitViewModel, modifier: Modifier) {
@@ -31,14 +36,32 @@ fun HomeScreen(navController: NavController, viewModel: HabitViewModel, modifier
     }
 
     Box(
-        modifier = Modifier.fillMaxSize().padding(bottom = bottomPadding + 16.dp)
+        modifier = modifier.padding(bottom = bottomPadding + 16.dp)
     ){
 
+
+        Text(text = "All Habits", style = MaterialTheme.typography.headlineMedium)
+
         LazyColumn {
+
             items(habits) { habit ->
-                Text(text = habit.title)
+
+                Card(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)) {
+                    Row (modifier = Modifier.padding(16.dp)){
+                        Column {
+                            androidx.compose.material3.Text(text = "Title: ${habit.title}", style = MaterialTheme.typography.bodyLarge)
+                            androidx.compose.material3.Text(text = "Description: ${habit.description}", style = MaterialTheme.typography.bodyMedium)
+                        }
+                        FloatingActionButton(onClick = { navController.navigate("addHabit") }  )
+                        { Icon(Icons.Default.Delete, contentDescription = "Delete Habit") }
+                    }
+
+                }
             }
         }
+
 
         FloatingActionButton(onClick = { navController.navigate("addHabit") },
             modifier = Modifier.align(Alignment.BottomEnd)) {
@@ -46,12 +69,6 @@ fun HomeScreen(navController: NavController, viewModel: HabitViewModel, modifier
         }
 
 
-        Button(
-            onClick = { navController.navigate("allHabits") },
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text("Show All Habits")
-        }
 
     }
 

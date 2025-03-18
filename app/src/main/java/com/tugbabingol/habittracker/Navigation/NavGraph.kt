@@ -10,6 +10,5 @@ fun NavGraph(navController: NavHostController, viewModel: HabitViewModel, modifi
     NavHost(navController = navController, startDestination = "home") {
         composable("home") { HomeScreen(navController, viewModel, modifier) }
         composable("addHabit") { AddHabitScreen(navController, viewModel, modifier) }
-        composable("allHabits") { AllHabitsScreen(navController, viewModel) } // Yeni ekran eklendi
     }
 }
