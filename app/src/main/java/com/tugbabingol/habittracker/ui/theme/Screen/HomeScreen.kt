@@ -40,8 +40,6 @@ fun HomeScreen(navController: NavController, viewModel: HabitViewModel, modifier
     ){
 
 
-        Text(text = "All Habits", style = MaterialTheme.typography.headlineMedium)
-
         LazyColumn {
 
             items(habits) { habit ->
@@ -54,7 +52,7 @@ fun HomeScreen(navController: NavController, viewModel: HabitViewModel, modifier
                             androidx.compose.material3.Text(text = "Title: ${habit.title}", style = MaterialTheme.typography.bodyLarge)
                             androidx.compose.material3.Text(text = "Description: ${habit.description}", style = MaterialTheme.typography.bodyMedium)
                         }
-                        FloatingActionButton(onClick = { navController.navigate("addHabit") }  )
+                        FloatingActionButton(onClick = { viewModel.deleteHabit(habit) }  )
                         { Icon(Icons.Default.Delete, contentDescription = "Delete Habit") }
                     }
 
