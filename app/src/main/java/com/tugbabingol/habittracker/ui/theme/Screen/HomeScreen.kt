@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -45,112 +46,55 @@ fun HomeScreen(navController: NavController, viewModel: HabitViewModel, modifier
     }
 
 
-
-    /*Box(
-        modifier = modifier.padding(bottom = bottomPadding + 16.dp)
-    ) {
-
-        Card {
-            LazyColumn { //kaydırılabilir liste
-
+        Column(
+            modifier = modifier.fillMaxSize()
+        ) {
+            LazyColumn(
+                modifier = Modifier.weight(1f) // Listenin kalan tüm alanı kaplamasını sağlar
+            ) {
                 items(habits) { habit ->
-
-
-                    Row(
+                    ElevatedCard(
+                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                            .background(MaterialTheme.colorScheme.surfaceDim)
-                            .padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                            .padding(8.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
                     ) {
-                        Column {
-                            androidx.compose.material3.Text(
-                                text = "Title: ${habit.title}",
-                                style = MaterialTheme.typography.bodyLarge
-                            )
-                            androidx.compose.material3.Text(
-                                text = "Description: ${habit.description}",
-                                style = MaterialTheme.typography.bodyMedium
-                            )
+                        Row(modifier = Modifier.padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically) {
+                            Column {
+                                androidx.compose.material3.Text(
+                                    text = "Title: ${habit.title}",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                                androidx.compose.material3.Text(
+                                    text = "Description: ${habit.description}",
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                            Spacer(modifier = Modifier.weight(1f))
+                            FloatingActionButton(onClick = { viewModel.deleteHabit(habit) }) {
+                                Icon(Icons.Default.Delete, contentDescription = "Delete Habit")
+                            }
                         }
-                        Spacer(modifier = Modifier.weight(1f))//Butonu sağa itmek için
-                        FloatingActionButton(
-                            onClick = { viewModel.deleteHabit(habit) },
-                            modifier = Modifier.size(40.dp)
-                        )
-                        { Icon(Icons.Default.Delete, contentDescription = "Delete Habit") }
                     }
-
-
                 }
-
-
             }
+
+            Spacer(modifier = Modifier.height(16.dp)) // Buton ile liste arasında boşluk bırakır
+
             FloatingActionButton(
                 onClick = { navController.navigate("addHabit") },
                 modifier = Modifier
-                    .size(80.dp, 40.dp)
-                    .align(Alignment.End)
+                    .align(Alignment.End) // Sağda konumlandır
+                    .padding(16.dp)
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add Habit")
             }
         }
 
 
-    }*/
-    Box(
-        modifier = modifier.padding(bottom = bottomPadding + 16.dp)
-    ) {
 
-
-        LazyColumn {
-
-            items(habits) { habit ->
-
-                ElevatedCard(
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 6.dp
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surface,
-                    )
-                ) {
-                    Row(modifier = Modifier.padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically) {
-                        Column {
-                            androidx.compose.material3.Text(
-                                text = "Title: ${habit.title}",
-                                style = MaterialTheme.typography.bodyLarge
-                            )
-                            androidx.compose.material3.Text(
-                                text = "Description: ${habit.description}",
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
-                        FloatingActionButton(onClick = { viewModel.deleteHabit(habit) })
-                        { Icon(Icons.Default.Delete, contentDescription = "Delete Habit") }
-                    }
-
-                }
-            }
-        }
-
-
-        FloatingActionButton(
-            onClick = { navController.navigate("addHabit") },
-            modifier = Modifier.align(Alignment.BottomEnd)
-        ) {
-            Icon(Icons.Default.Add, contentDescription = "Add Habit")
-        }
-
-
-    }
 
 
 }
